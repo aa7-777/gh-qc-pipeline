@@ -401,3 +401,26 @@ done
 
 - `README.md`：快速开始
 - `PIPELINE.md`：设计文档与规则细节
+
+
+## 14. 自动生成样本 (gen_sample.py)
+
+`gen_sample.py` 用于从当前 git 仓库自动生成质检输入样本 `examples/sample.json`，免去手动填写 `repo_id`、`commit_sha`、`readme` 等重复字段。
+
+### 用途
+
+- 读取当前仓库的 `git remote`、`HEAD`、`README.md`
+- 生成符合 `gh_qc_skill` 输入格式的 `examples/sample.json`
+- 生成后可直接运行自动质检
+
+### 用法
+
+```bash
+# 进入项目根目录
+cd gh_qc_skill
+
+# 自动从 git 读取（需要当前目录是 git 仓库且配置了 origin）
+python3 gen_sample.py
+
+# 或者手动指定参数
+python3 gen_sample.py --owner 你的用户名 --repo 你的仓库名 --sha <commit_sha>
